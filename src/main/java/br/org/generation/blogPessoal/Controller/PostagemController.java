@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.org.generation.blogPessoal.Repository.PostagemRepository;
 import br.org.generation.blogPessoal.model.Postagem;
+import br.org.generation.blogPessoal.service.PostagemService;
 
 @RestController
 @RequestMapping ("/postagem")
@@ -26,8 +27,11 @@ public class PostagemController {
 	@Autowired
 	private PostagemRepository repository;
 	
+	@Autowired
+	private PostagemService postagemService;
+	
 	@GetMapping //find all
-	public ResponseEntity<List<Postagem>> GetAll (){
+	public ResponseEntity<List<Postagem>> GetAll(){
 		return ResponseEntity.ok(repository.findAll()); 
 	}
     
@@ -52,6 +56,16 @@ public class PostagemController {
 	public ResponseEntity<Postagem> alterarPostagem(@RequestBody Postagem postagem){
 		return ResponseEntity.status(HttpStatus.OK).body(repository.save(postagem));
 	
+	}
+	
+	@PutMapping("curtir/{id}")
+	public ResponseEntity<Postagem> curtirPostagemId(@PathVariable Long id){
+		return ResponseEntity.status(HttpStatus.OK).body(postagemService.curtir(id));
+	}
+	
+	@PutMapping("descurtir/{id}")
+	public ResponseEntity<Postagem> descurtirPostagemId(@PathVariable Long id){
+		return ResponseEntity.status(HttpStatus.OK).body(postagemService.descurtir(id));
 	}
 	
 	@DeleteMapping("/{id}")

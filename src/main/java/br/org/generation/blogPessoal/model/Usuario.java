@@ -12,13 +12,23 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data 
-@NoArgsConstructor
 @Entity
 @Table(name = "tb_usuarios")
 public class Usuario {
+
+	public Usuario(long id, @NotNull @Size(min = 2, max = 100) String nome,
+			@NotNull @Size(min = 2, max = 100) String usuario, @NotNull @Size(min = 5) String senha) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.usuario = usuario;
+		this.senha = senha;
+	}
+
+	public Usuario() {
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

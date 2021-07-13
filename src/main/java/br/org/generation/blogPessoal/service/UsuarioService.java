@@ -1,4 +1,4 @@
-package br.org.generation.blogPessoal.UsuarioService;
+package br.org.generation.blogPessoal.service;
 
 import java.nio.charset.Charset;
 import java.util.Optional;
@@ -18,18 +18,17 @@ public class UsuarioService {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 
-	public Optional<Usuario> cadastrarUsuario(Usuario usuario) {
-		
+	public Usuario cadastrarUsuario(Usuario usuario) {
 		
 		if(usuarioRepository.findByUsuario(usuario.getUsuario()).isPresent())
-			return null;
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "USUÁRIO JA EXISTE", null);
 		
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
 		String senhaEncoder = encoder.encode(usuario.getSenha());
 		usuario.setSenha(senhaEncoder);
 
-		return Optional.of(usuarioRepository.save(usuario));
+		return (usuarioRepository.save(usuario));
 	}
 	
 	public Optional<Usuario> atualizarUsuario(Usuario usuario){

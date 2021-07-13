@@ -11,6 +11,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
 import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -38,6 +39,9 @@ public class Postagem {
 	@Temporal (TemporalType.TIMESTAMP)
 	@Column (name = "hora_postagem")
 	private Date datatempo = new java.sql.Date(System.currentTimeMillis());
+	
+	@PositiveOrZero
+	private int curtidas;
 	
 	@ManyToOne
 	@JsonIgnoreProperties ("postagem")
