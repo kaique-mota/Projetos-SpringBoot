@@ -45,6 +45,10 @@ public class Usuario {
 	@NotNull
 	@Size(min = 5)
 	private String senha;
+	
+	private String foto;
+	
+	private String tipo;
 		
 	@OneToMany (mappedBy = "usuario", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("usuario")

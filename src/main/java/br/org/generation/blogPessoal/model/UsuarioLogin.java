@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UsuarioLogin {
 
+	private long id;
+	
     private String nome;
 	
 	private String usuario;
@@ -14,4 +16,8 @@ public class UsuarioLogin {
 	private String senha;
 	
 	private String token;
+	
+	private String foto;
+	
+	private String tipo;
 }
